@@ -128,7 +128,11 @@ Extends Angular's [FormControl](https://angular.io/api/forms/FormControl) with t
 
 - `saveStatus: NgxFirebaseSaveStatus` Read only.
 - `saveStatus$: Observable<NgxFirebaseSaveStatus>` An observable of the above.
-- `firebaseError: Error` Read only. Set when an error has occurred retrieving or updating the reference value. Otherwise null.
+- `firebaseError: Error` Read only. Set when an error has occurred retrieving or updating the reference value. Otherwise `null`.
 - `firebaseError$: Observable<Error>`: An observable of the above.
 
 ### class `NgxFirebaseFormBuilder`
+
+A helper class with one static method:
+
+- `static group(parentRef: Reference, config: NgxFirebaseGroupConfig, recentlySavedDelay?: number): FormGroup` Creates an Angular [FormGroup](https://angular.io/api/forms/FormGroup) populated with a set of `NgxFirebaseControl`s.
