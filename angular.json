@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ngx-firebase-forms": {
+    "ngx-firebase-forms-demo": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ngx-firebase-forms",
+            "outputPath": "dist/ngx-firebase-forms-demo",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -50,18 +50,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ngx-firebase-forms:build"
+            "browserTarget": "ngx-firebase-forms-demo:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ngx-firebase-forms:build:production"
+              "browserTarget": "ngx-firebase-forms-demo:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ngx-firebase-forms:build"
+            "browserTarget": "ngx-firebase-forms-demo:build"
           }
         },
         "test": {
@@ -95,7 +95,7 @@
         }
       }
     },
-    "ngx-firebase-forms-e2e": {
+    "ngx-firebase-forms-demo-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -103,11 +103,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "ngx-firebase-forms:serve"
+            "devServerTarget": "ngx-firebase-forms-demo:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ngx-firebase-forms:serve:production"
+              "devServerTarget": "ngx-firebase-forms-demo:serve:production"
             }
           }
         },
@@ -121,7 +121,47 @@
           }
         }
       }
+    },
+    "ngx-firebase-forms": {
+      "root": "projects/ngx-firebase-forms",
+      "sourceRoot": "projects/ngx-firebase-forms/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngx-firebase-forms/tsconfig.lib.json",
+            "project": "projects/ngx-firebase-forms/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "projects/ngx-firebase-forms/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-firebase-forms/src/test.ts",
+            "tsConfig": "projects/ngx-firebase-forms/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-firebase-forms/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-firebase-forms/tsconfig.lib.json",
+              "projects/ngx-firebase-forms/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
-  "defaultProject": "ngx-firebase-forms"
+  "defaultProject": "ngx-firebase-forms-demo"
 }

@@ -1,0 +1,11 @@
+{
+  "name": "ngx-firebase-forms",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
+    "@angular/core": "^6.0.0-rc.0 || ^6.0.0",
+    "@angular/forms": "^6.0.3",
+    "angularfire2": "^5.0.0-rc.10",
+    "firebase": "^5.0.4"
+  }
+}
