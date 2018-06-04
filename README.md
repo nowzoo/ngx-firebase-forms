@@ -1,27 +1,39 @@
 # NgxFirebaseForms
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.7.
+Angular FormControl extended and bound to a Firebase reference.
 
-## Development server
+## Quick Start
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+```bash
+npm i @nowzoo/ngx-firebase-forms
+```
 
-## Code scaffolding
+This library consists of a couple of classes: `NgxFirebaseControl` which extends Angular's `FormControl` and `NgxFirebaseFormBuilder`, which has a static helper method to create a `FormGroup` of `NgxFirebaseControl`'s.  
+In additions there a re a couple of interfaces. **There is no module.**
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Using `new NgxFirebaseControl` to create a single control:
+```ts
+import { Validators } from '@angular/forms';
+import { Reference } from '@firebase/database';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { NgxFirebaseControl, NgxFirebaseControlOptions } from '@nowzoo/ngx-firebase-forms';
+// etc..
 
-## Build
+export class MyComponent implements OnInit {
+  control: NgxFirebaseControl;
+  ref: Reference;
+  constructor(
+    private afDb: AngularFireDatabase
+  ){}
+  ngOnInit() {
+    // Note the library does not depend on angularfire2. You can get a firebase ref however you wish.
+    this.ref = this.afDb.database.ref(`foo/bar`) as Reference;
+    const options: NgxFirebaseControlOptions = {ref: ref, updateOn: 'blur', trim: true, validators: [Validators.required] };
+    this.control = new NgxFirebaseControl(options);
+    // the control is automatically populated with the database value,
+    // and changes to its value are automatically saved (if the control is valid)
+  }
+}
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Using `NgxFirebaseFormBuilder` to create a `FormGroup`...
