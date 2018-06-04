@@ -82,3 +82,36 @@ export class DemoFormBuilderComponent implements OnInit {
   }
 }
 ```
+
+## API
+
+
+`enum NgxFirebaseSaveStatus`
+
+The current save status of the control. Possible values are:
+- `NgxFirebaseSaveStatus.INITIALIZING` The control has yet to be populated with the database value.
+- `NgxFirebaseSaveStatus.SAVING` The control value is being saved to the database.
+- `NgxFirebaseSaveStatus.RECENTLY_SAVED` The control value has been recently been saved to the database. By default a control's save status will remain `RECENTLY_SAVED` for three seconds after update.
+- `NgxFirebaseSaveStatus.SAVED` The control value has been populated with the database value.
+- `NgxFirebaseSaveStatus.FIREBASE_ERROR` A Firebase error occurred when retrieving or updating the value. In this case the control's `firebaseError` will be set.
+
+`interface NgxFirebaseControlOptions extends  AbstractControlOptions`
+
+What you pass into the `NgxFirebaseControl` constructor.  Extends Angular's [AbstractControlOptions](https://angular.io/api/forms/AbstractControlOptions) with the following:
+
+- `ref: Reference` Required.
+- `recentlySavedDelay?: number` Optional. The amount of time in milliseconds the control's save status should be `RECENTLY_SAVED` after saving.
+- `trim?: boolean` Optional. Whether to trim text values before validating and saving. You should only use this with `updateOn: 'blur'`, as it sets the value of the control.
+
+
+`export interface NgxFirebaseGroupConfig`
+
+An object with the control configurations you pass to `NgxFirebaseFormBuilder.group()`
+
+- `[key: string]: NgxFirebaseGroupConfigEntry` The key is the name of the field.
+
+`export interface NgxFirebaseGroupConfigEntry extends  AbstractControlOptions`
+
+An entry in `NgxFirebaseGroupConfig` (see above.) Extends AbstractControlOptions.
+
+- `trim?: boolean` Optional. Whether to trim text values before validating and saving. You should only use this with `updateOn: 'blur'`, as it sets the value of the control.
