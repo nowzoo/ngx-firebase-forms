@@ -1,11 +1,11 @@
 # NgxFirebaseForms
 
-Angular FormControl extended and bound to a Firebase reference.
+An Angular library that extends [FormControl](https://angular.io/api/forms/FormControl) to bind it to a Firebase reference. Also comes with a helper to create FormGroups from a parent reference and a set of control configs, modeled on Angular `FormBuilder.group()`.
 
 ## Quick Start
 
 ```bash
-npm i @nowzoo/ngx-firebase-forms
+npm i @nowzoo/ngx-firebase-forms --save
 ```
 
 This library consists of a couple of classes: `NgxFirebaseControl` which extends Angular's `FormControl` and `NgxFirebaseFormBuilder`, which has a static helper method to create a `FormGroup` of `NgxFirebaseControl`'s.  
