@@ -38,14 +38,13 @@ export class NgxFirebaseControl extends FormControl {
     this.ref.once('value')
       .then((snap: DataSnapshot) => {
         const value = snap.val();
+        this.setValue(value, {emitEvent: false});
         if (options.validators) {
           this.setValidators(options.validators);
         }
         if (options.asyncValidators) {
           this.setAsyncValidators(options.asyncValidators);
         }
-
-        this.setValue(value, {emitEvent: false});
         this.markAsPristine();
         this.saveStatus$$.next(NgxFirebaseSaveStatus.SAVED);
       })
@@ -62,7 +61,6 @@ export class NgxFirebaseControl extends FormControl {
     if (this.trim) {
       const str: string = value || '';
       if (str.length !== str.trim().length) {
-        console.log('bailing because of whitespace');
         this.setValue(str.trim());
         this.updateValueAndValidity();
         return;
