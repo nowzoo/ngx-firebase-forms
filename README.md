@@ -86,7 +86,7 @@ export class DemoFormBuilderComponent implements OnInit {
 ## API
 
 
-### `enum NgxFirebaseSaveStatus`
+### enum `NgxFirebaseSaveStatus`
 
 The current save status of the control. Possible values are:
 - `NgxFirebaseSaveStatus.INITIALIZING` The control has yet to be populated with the database value.
@@ -95,23 +95,40 @@ The current save status of the control. Possible values are:
 - `NgxFirebaseSaveStatus.SAVED` The control value has been populated with the database value.
 - `NgxFirebaseSaveStatus.FIREBASE_ERROR` A Firebase error occurred when retrieving or updating the value. In this case the control's `firebaseError` will be set.
 
-### `interface NgxFirebaseControlOptions extends  AbstractControlOptions`
+### interface `NgxFirebaseControlOptions`
 
-What you pass into the `NgxFirebaseControl` constructor.  Extends Angular's [AbstractControlOptions](https://angular.io/api/forms/AbstractControlOptions) with the following:
+What you pass into the `NgxFirebaseControl` constructor.  Extends Angular's [AbstractControlOptions](https://angular.io/api/forms/AbstractControlOptions):
 
 - `ref: Reference` Required.
 - `recentlySavedDelay?: number` Optional. The amount of time in milliseconds the control's save status should be `RECENTLY_SAVED` after saving.
 - `trim?: boolean` Optional. Whether to trim text values before validating and saving. You should only use this with `updateOn: 'blur'`, as it sets the value of the control.
+- `validators?: ValidatorFn | ValidatorFn[] | null` See AbstractControlOptions.
+- `asyncValidators?: AsyncValidatorFn | AsyncValidatorFn[] | null` See AbstractControlOptions.
+- `updateOn?: 'change' | 'blur' | 'submit'` See AbstractControlOptions.
 
 
-### `interface NgxFirebaseGroupConfig`
+### interface `NgxFirebaseGroupConfig`
 
 An object with the control configurations you pass to `NgxFirebaseFormBuilder.group()`
 
-- `[key: string]: NgxFirebaseGroupConfigEntry` The key is the name of the field.
+- `[key: string]: NgxFirebaseGroupConfigEntry` A set of key-value pairs. The key is the name of the field. The value is field configuration.
 
-### `interface NgxFirebaseGroupConfigEntry extends  AbstractControlOptions`
+### interface `NgxFirebaseGroupConfigEntry`
 
-An entry in `NgxFirebaseGroupConfig` (see above.) Extends AbstractControlOptions.
+An entry in `NgxFirebaseGroupConfig` (see above.) Extends Angular's [AbstractControlOptions](https://angular.io/api/forms/AbstractControlOptions):
 
 - `trim?: boolean` Optional. Whether to trim text values before validating and saving. You should only use this with `updateOn: 'blur'`, as it sets the value of the control.
+- `validators?: ValidatorFn | ValidatorFn[] | null` See AbstractControlOptions.
+- `asyncValidators?: AsyncValidatorFn | AsyncValidatorFn[] | null` See AbstractControlOptions.
+- `updateOn?: 'change' | 'blur' | 'submit'` See AbstractControlOptions.
+
+### class `NgxFirebaseControl`
+
+Extends Angular's [FormControl](https://angular.io/api/forms/FormControl) with the following public properties:
+
+- `saveStatus: NgxFirebaseSaveStatus` Read only.
+- `saveStatus$: Observable<NgxFirebaseSaveStatus>` An observable of the above.
+- `firebaseError: Error` Read only. Set when an error has occurred retrieving or updating the reference value. Otherwise null.
+- `firebaseError$: Observable<Error>`: An observable of the above.
+
+### class `NgxFirebaseFormBuilder`
