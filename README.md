@@ -2,14 +2,17 @@
 
 An Angular library that extends [FormControl](https://angular.io/api/forms/FormControl) to bind it to a Firebase reference. Also comes with a helper to create FormGroups from a parent reference and a set of control configs, modeled on Angular `FormBuilder.group()`.
 
+**NB:** `NgxFirebaseControl` is primarily intended to work with Firebase references to scalar datapoints, like strings or numbers. The code uses `ref.set()` when the control's value changes and is valid. That does not mean you cannot use it with objects or arrays, but you should think carefully about how you go about things.
+
 ## Quick Start
 
 ```bash
 npm i @nowzoo/ngx-firebase-forms --save
 ```
+**There is no module to import.**
 
-This library consists of a couple of classes: `NgxFirebaseControl` which extends Angular's `FormControl` and `NgxFirebaseFormBuilder`, which has a static helper method to create a `FormGroup` of `NgxFirebaseControl`'s.  
-In additions there a re a couple of interfaces. **There is no module.**
+This library consists of a couple of classes: `NgxFirebaseControl` which extends Angular's `FormControl`, and `NgxFirebaseFormBuilder`, which has a static helper method to create a `FormGroup` of `NgxFirebaseControl`'s.  
+In additions there a re a couple of interfaces.
 
 Note that the examples below use [AngularFireDatabase from angularfire2](https://github.com/angular/angularfire2) to convenintly create Firebase references, but you can use whatever method you want. The library is not dependent on angularfire2.
 
