@@ -3,10 +3,22 @@ import { Reference, DataSnapshot } from '@firebase/database';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { NgxFirebaseSaveStatus, NgxFirebaseControlOptions } from './interfaces';
 export class NgxFirebaseControl extends FormControl {
-  private ref: Reference;
-  private recentlySavedDelay: number;
+
+  private _options: NgxFirebaseControlOptions;
+  get ref(): Reference {
+    return this._options.ref;
+  }
+
+  get recentlySavedDelay(): number {
+    return this._options.recentlySavedDelay || 3000;
+  }
   private recentlySavedTimeout: any = null;
-  private trim: boolean;
+
+
+  get trim(): boolean {
+    return  this._options.trim === true;
+  }
+
   private firebaseError$$: BehaviorSubject<Error>;
   get firebaseError$(): Observable<Error> {
     return this.firebaseError$$.asObservable();
@@ -30,9 +42,7 @@ export class NgxFirebaseControl extends FormControl {
   }
 
   init(options: NgxFirebaseControlOptions) {
-    this.ref = options.ref;
-    this.recentlySavedDelay = options.recentlySavedDelay || 3000;
-    this.trim = options.trim && options.trim === true;
+    this._options = options;
     this.firebaseError$$ = new BehaviorSubject(null);
     this.saveStatus$$ = new BehaviorSubject(NgxFirebaseSaveStatus.INITIALIZING);
     this.ref.once('value')
@@ -59,7 +69,10 @@ export class NgxFirebaseControl extends FormControl {
       return;
     }
     if (this.trim) {
-      const str: string = value || '';
+      if ( 'string' !== typeof value) {
+        return;
+      }
+      const str: string = value;
       if (str.length !== str.trim().length) {
         this.setValue(str.trim());
         this.updateValueAndValidity();
