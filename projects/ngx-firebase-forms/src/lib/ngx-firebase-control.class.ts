@@ -14,7 +14,6 @@ export class NgxFirebaseControl extends FormControl {
   }
   private recentlySavedTimeout: any = null;
 
-
   get trim(): boolean {
     return  this._options.trim === true;
   }

@@ -1,9 +1,7 @@
 var wallabyWebpack = require('wallaby-webpack');
 var path = require('path');
 
-var compilerOptions = Object.assign(
-  require('./tsconfig.lib.json').compilerOptions,
-  require('./tsconfig.spec.json').compilerOptions);
+var compilerOptions = require('./tsconfig.wallaby.spec.json').compilerOptions;
 
 compilerOptions.module = 'CommonJs';
 
@@ -81,6 +79,6 @@ module.exports = function (wallaby) {
     },
     filesWithNoCoverageCalculated: ['src/*.ts', 'src/**/*.module.ts'],
 
-    debug: false
+    debug: true
   };
 };

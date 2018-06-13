@@ -1,11 +1,27 @@
 {
   "name": "@nowzoo/ngx-firebase-forms",
-  "version": "0.0.5",
+  "version": "1.0.0",
+  "description": "Binding Angular FormControls to Firebase references. Wholesale or retail.",
+  "keywords": [
+    "angular",
+    "firebase",
+    "bindings",
+    "form",
+    "formcontrol"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nowzoo/ngx-firebase-forms.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nowzoo/ngx-firebase-forms/issues"
+  },
+  "homepage": "https://github.com/nowzoo/ngx-firebase-forms#readme",
+  "license": "MIT",
   "peerDependencies": {
     "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
     "@angular/core": "^6.0.0-rc.0 || ^6.0.0",
     "@angular/forms": "^6.0.3",
-    "angularfire2": "^5.0.0-rc.10",
     "firebase": "^5.0.4"
   }
 }

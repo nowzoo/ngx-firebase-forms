@@ -4,7 +4,6 @@ describe('NgxFirebaseFormBuilder', () => {
   it('should create an instance', () => {
     expect(new NgxFirebaseFormBuilder()).toBeTruthy();
   });
-
   describe('group', () => {
     let ref: any;
     let childRef: any;

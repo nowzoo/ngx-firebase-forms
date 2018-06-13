@@ -10,7 +10,6 @@ export enum NgxFirebaseSaveStatus {
   'FIREBASE_ERROR' = 'FIREBASE_ERROR',
 }
 
-
 export interface NgxFirebaseControlOptions extends  AbstractControlOptions {
   ref: Reference;
   recentlySavedDelay?: number;
